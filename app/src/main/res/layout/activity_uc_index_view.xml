@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?><!--cn.ittiger.ucpage.view.UCIndexView-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+    xmlns:ucindexview="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<!--        ucindexview:contentHeadViewHeight="@dimen/dp_40"
+                ucindexview:pageHeadViewHeight="@dimen/dp_40"
+  ucindexview:pageHeadViewLayoutId="@layout/page_head_view_layout"
+-->
+    <demo.lww.test.ucdemo1.view.UCIndexView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+
+        ucindexview:pageHeadViewHeight="40dp"
+        android:id="@+id/ucindexview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       ucindexview:isPageHeadViewFixed="true"
+        ucindexview:isContentHeadViewEnable="false"
+        ucindexview:isPullRestoreEnable="false"
+      ucindexview:pageNavigationViewHeight="@dimen/dp_200"
+
+        ucindexview:pageNavigationViewLayoutId="@layout/page_navigation_view_layout"
+
+        ucindexview:contentHeadViewLayoutId="@layout/content_head_view_layout"
+
+        ucindexview:contentViewLayoutId="@layout/content_view_layout">
+    </demo.lww.test.ucdemo1.view.UCIndexView>
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:onClick="back" />
+
+</RelativeLayout>

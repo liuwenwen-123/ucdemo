@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@android:color/holo_purple"
-              android:gravity="center">
-    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_purple"
+    android:gravity="center"
+    android:orientation="horizontal">
+   <!-- <TextView
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:text="@string/content"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"/>-->
+    <!--com.hxqm.ebabydemo.views.PullToRefreshLayout
+
+    PullableRecycleView
+
+    <
+    -->
+   <demo.lww.test.ucdemo1.PullToRefreshLayout
+           android:id="@+id/refresh_view"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+             <include layout="@layout/refresh_head" />
+
+             <demo.lww.test.ucdemo1.PullableRecycleView
+                 android:id="@+id/trcycle_my_dynamic"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+
+             </demo.lww.test.ucdemo1.PullableRecycleView>
+
+             <include layout="@layout/load_more" />
+      </demo.lww.test.ucdemo1.PullToRefreshLayout>
+
+
+
+
+   <!-- <demo.lww.test.ucdemo1.PullableRecycleView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </demo.lww.test.ucdemo1.PullableRecycleView>-->
 </LinearLayout>

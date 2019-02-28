@@ -452,8 +452,13 @@ public class PullToRefreshLayout extends RelativeLayout {
 				break;
 		}
 		// 事件分发交给父类
-		super.dispatchTouchEvent(ev);
-		return true;
+     	super.dispatchTouchEvent(ev);
+
+		return IsWork;
+	}
+	private  boolean  IsWork=false;
+	public void setDispatchTouchEvent(boolean isWork){
+		IsWork=isWork;
 	}
 
 	/**
@@ -615,4 +620,8 @@ public class PullToRefreshLayout extends RelativeLayout {
 		 */
 		void onLoadMore(PullToRefreshLayout pullToRefreshLayout);
 	}
+
+
+
+
 }

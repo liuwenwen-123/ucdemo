@@ -5,8 +5,11 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import demo.lww.test.ucdemo1.R;
 
@@ -67,6 +70,7 @@ public class UCIndexView extends FrameLayout implements TouchMoveView.TouchMoveL
      * 手指放开后，视图自动滑动时的时间间隔，默认每间隔5毫秒滑动一次
      */
     private int mAutoSlipTimeStep = 5;
+    private int measuredHeight;
 
     public UCIndexView(Context context) {
 
@@ -177,17 +181,29 @@ public class UCIndexView extends FrameLayout implements TouchMoveView.TouchMoveL
         if (mIsPageHeadViewFixed) {//页面头部固定时，将PageNavigationView的PadingTop设置为PageHeadView的高度，防止PageHeadView将PageNavigationView的部分内容遮住
             mPageNavigationView.setPadding(0, mPageHeadViewHeight, 0, 0);
         }
-        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, (int) (pageNavigationViewHeight + 0.5f));
-        mPageNavigationView.setLayoutParams(layoutParams);
-        mPageNavigationView.setTouchMoveListener(this);
+
+        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.page_navigation_view_layout,
+                null);
+        View viewById = inflate.findViewById(R.id.ll_trest);
+        TextView viewById1 = (TextView) inflate.findViewById(R.id.tv_item);
+        viewById1.setText("123");
+        viewById.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+         inflate.measure(0,0);
+          measuredHeight = inflate.getMeasuredHeight();
+        Log.e("heioght   ", inflate.getHeight() + "   "+ inflate.getMeasuredHeight());
+//        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, (int) (pageNavigationViewHeight + 0.5f));
+//        mPageNavigationView.setLayoutParams(layoutParams);
+//        mPageNavigationView.setTouchMoveListener(this);
 
         //向上滑动时PageNavigationView的停止位置设置为PageHeadView高度的一半
         mPageNavigationView.setShowStopMarginTop(-mPageHeadViewHeight / 2);
         //PageNavigationView的滑动距离为PageHeadView高度的一半
         mPageNavigationView.setNeedMoveHeight(mPageHeadViewHeight / 2);
-        mPageNavigationView.setHideStopMarginTop(layoutParams.topMargin);
+//        mPageNavigationView.setHideStopMarginTop(layoutParams.topMargin);
 
-        inflate(mContext, resId, mPageNavigationView);
+//        inflate(mContext, resId, mPageNavigationView);
+
+        mPageNavigationView.addView(inflate);
         addView(mPageNavigationView);
     }
 
@@ -231,10 +247,13 @@ public class UCIndexView extends FrameLayout implements TouchMoveView.TouchMoveL
         if (resId == 0) {
             throw new IllegalArgumentException("please set attribution contentViewLayoutId int UCIndexView");
         }
+        marginTop=measuredHeight;
 
         mContentView = new ContentView(mContext);
-        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT);
         layoutParams.topMargin = (int) (marginTop + 0.5f);
+
         mContentView.setLayoutParams(layoutParams);
         mContentView.setTouchMoveListener(this);
 
@@ -257,6 +276,7 @@ public class UCIndexView extends FrameLayout implements TouchMoveView.TouchMoveL
      */
     private float mDelY = 0;
 
+
     @Override
     public void onTouchMoveEvent(MotionEvent event) {
 
@@ -265,6 +285,7 @@ public class UCIndexView extends FrameLayout implements TouchMoveView.TouchMoveL
                 mLastTouchY = event.getRawY();
                 break;
             case MotionEvent.ACTION_MOVE:
+                Log.e("pppppp", "1111");
                 mDelY = event.getRawY() - mLastTouchY;
                 viewMove(mDelY, mIsPullRestoreEnable);
                 mLastTouchY = event.getRawY();
@@ -420,4 +441,19 @@ public class UCIndexView extends FrameLayout implements TouchMoveView.TouchMoveL
 
         mIsPullRestoreEnable = isPullRestoreEnable;
     }
+
+
+/*
+
+    @Override
+  public boolean dispatchTouchEvent(MotionEvent ev) {
+  getParent().requestDisallowInterceptTouchEvent(true);
+  return super.dispatchTouchEvent(ev);
+  }
+*/
+
+
+    //dispatchTouchEvent
+
+
 }

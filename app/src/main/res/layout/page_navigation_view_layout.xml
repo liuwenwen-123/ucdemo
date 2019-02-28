@@ -7,7 +7,8 @@
     android:orientation="horizontal">
 
     <TextView
+        android:id="@+id/tv_item"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="500dp"
         android:text="@string/navi_content" />
 </LinearLayout>

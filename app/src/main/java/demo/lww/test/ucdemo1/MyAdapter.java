@@ -1,6 +1,7 @@
 package demo.lww.test.ucdemo1;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -12,41 +13,49 @@ import java.util.List;
  * Created by Administrator on 2019/2/27 0027.
  */
 
-public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MyAdapter  extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private ArrayList<String> list;
+
+
+    public MyAdapter(ArrayList<String> data) {
+        this.list = data;
+    }
+
+
 
     public void addList(List<String> items) {
         this.list.addAll(items);notifyDataSetChanged();
     }
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-          return  null;
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // 实例化展示的view
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_rv_item, parent, false);
+        // 实例化viewholder
+        ViewHolder viewHolder = new ViewHolder(v);
+          return  viewHolder;
 
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(MyAdapter.ViewHolder holder, int position) {
+// 绑定数据
+      holder.mTv.setText(list.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+          return list == null ? 0 : list.size();
     }
 
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
-    public class MenuItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView newsType;
-        public MenuItemViewHolder(View v) {
-            super(v);
+        TextView mTv;
 
-        }
-
-        @Override
-        public void onClick(View v) {
-
+        public ViewHolder(View itemView) {
+            super(itemView);
+            mTv = (TextView) itemView.findViewById(R.id.item_tv);
         }
     }
+
 }

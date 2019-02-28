@@ -13,6 +13,7 @@ public class MoveView extends FrameLayout {
 
 	/**
 	 * 需要滑动的高度
+	 * 需要滑动的高度
 	 */
 	protected int mNeedMoveHeight = -1;
 	/**
